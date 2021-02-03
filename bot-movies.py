@@ -14,7 +14,7 @@ print('''=====> MOVIES TORRENT DOWNLOAD
 ===> by Jocimar Lopes''')
 
 movie = ''
-path= 'C:\\bots\\geckodriver.exe'
+path= 'geckodriver.exe'
 #tagName = 'Baixa'
 count = range(0, 8, 1)
 
