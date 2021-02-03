@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 import keyboard
+import random
 
 print('''=====> MOVIES TORRENT DOWNLOAD
 
@@ -13,11 +14,14 @@ print('''=====> MOVIES TORRENT DOWNLOAD
 ===> by Jocimar Lopes''')
 
 movie = ''
+path= 'C:\\bots\\geckodriver.exe'
+#tagName = 'Baixa'
+count = range(0, 8, 1)
+
 while movie == '':
     movie = input('Movie name: ')
-movie_search = movie + ' download torrent'
+movie_search = movie + ' dublado download torrent'
 
-path= 'C:\\bots\\geckodriver.exe'
 
 driver = webdriver.Firefox(executable_path=path)
 driver.maximize_window()
@@ -31,60 +35,95 @@ element.send_keys(movie_search)
 element.send_keys(Keys.ENTER)
 
 time.sleep(2.7)
-
 atual_url = driver.current_url
 driver.get(atual_url)
 
-time.sleep(1.8)
+def goClientTorrent():
+    keyboard.press_and_release('left')
+    time.sleep(1)
 
-best = driver.find_element_by_xpath("//div[@class='yuRUbf']/a/h3/span").text
-print(best)
+    keyboard.press_and_release('enter')
+    time.sleep(0.5)
 
-time.sleep(1)
+    keyboard.press_and_release('tab')
+    time.sleep(0.2)
 
-if best.find('Torrent'):
-    element = driver.find_element_by_partial_link_text('Torrent')
-    print('Searching by word: Torrent')
-elif best.find('Download'):
-    element = driver.find_element_by_partial_link_text('Download')
-    print('Searching by word: Download')
-elif best.find('Baixa'):
-    element = driver.find_element_by_partial_link_text('Baixa')
-    print('Searching by word: Baixa')
+    keyboard.press_and_release('tab')
+    time.sleep(0.2)
 
-element.click()
-time.sleep(3.9)
+    keyboard.press_and_release('tab')
+    time.sleep(0.2)
 
-current_url = driver.current_url
-source = "view-source:" + current_url
+    keyboard.press_and_release('enter')
+    time.sleep(5)
 
-driver.get(source)
+    keyboard.press_and_release('enter')
+    time.sleep(1)
+    print('Download is Started')
+    time.sleep(1)
+    print('Thank You!')
+    driver.close()
+    exit()
 
-time.sleep(2)
+def goPageDownload():
+    current_url = driver.current_url
+    source = "view-source:" + current_url
 
-element = driver.find_element_by_tag_name("a[href*='magnet:']")
-time.sleep(1)
-element.click()
-time.sleep(2.4)
+    driver.get(source)
 
-keyboard.press_and_release('left')
-time.sleep(1)
+    time.sleep(2)
 
-keyboard.press_and_release('enter')
-time.sleep(0.5)
+    element = driver.find_element_by_tag_name("a[href*='magnet:']")
+    time.sleep(1)
+    element.click()
+    time.sleep(2)
+    goClientTorrent()
 
-keyboard.press_and_release('tab')
-time.sleep(0.2)
+def goSearch(data):
+    time.sleep(2.1)
+    print('TagName: ', data)
+    time.sleep(1)
+    if data == 'Baixa':
+        print('Select: ', data)
+        findInSearch('Baixa', 'Download')
+    if data == 'Download':
+        print('Select: ', data)
+        findInSearch('Download', 'Torrent')
+    if data == 'Torrent' :
+        print('Select: ', data)
+        findInSearch('Torrent', 'Baixa')
 
-keyboard.press_and_release('tab')
-time.sleep(0.2)
+def findInSearch(var, pos):
+    print(var, pos)
+    best = driver.find_element_by_xpath("//div[@class='yuRUbf']/a/h3/span").text
+    returnURL = driver.current_url
+    if var != pos:
+        if best.find(var):
+            print('Find by ', var)
+            element = driver.find_element_by_xpath("//div[@class='yuRUbf']/a/h3/span")
+            element.text
+            print(element.text)
+            if element.text.find(var):
+                element = driver.find_elements_by_class_name("yuRUbf")
+                print('Searching by word: ', var)
+                tagName = pos
+                element[random.randint(0, 9)].click()
+                time.sleep(3.9)
+                page_source = driver.page_source
+                if 'magnet:' in page_source:
+                    print('Magnet: TRUE')
+                    time.sleep(1)
+                    print('Go to Link Download')
+                    goPageDownload()
+                else:
+                    print('Magnet: FALSE')
+                    print(var, pos)
+                    print(tagName)
+                    time.sleep(1)
+                    driver.get(returnURL)
+                    time.sleep(1.8)
+                    goSearch(pos)
+        else:
+            return
+goSearch('Baixa')
 
-keyboard.press_and_release('tab')
-time.sleep(0.2)
-
-keyboard.press_and_release('enter')
-time.sleep(4)
-
-keyboard.press_and_release('enter')
-time.sleep(1)
-exit()
