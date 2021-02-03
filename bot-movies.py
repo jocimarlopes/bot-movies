@@ -4,9 +4,12 @@ import time
 import keyboard
 
 print('''=====> MOVIES TORRENT DOWNLOAD
+
 ===> Non Complication
 ===> Non Adsense
 ===> Non need Adblock
+
+===> Version 1.0
 ===> by Jocimar Lopes''')
 
 movie = ''
