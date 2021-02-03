@@ -10,7 +10,7 @@ print('''=====> MOVIES TORRENT DOWNLOAD
 ===> Non Adsense
 ===> Non need Adblock
 
-===> Version 1.0
+===> Version 1.2
 ===> by Jocimar Lopes''')
 
 movie = ''
