@@ -4,6 +4,7 @@ I was having problems downloading movies, initially I had problems with ads, the
 
 # Make sure you have installed
 
+- Firefox - here: https://www.mozilla.org/pt-BR/firefox/new/
 - Python - here: https://python.org/ 
 - Transmission - here https://transmissionbt.com/
 or another Client Torrent
