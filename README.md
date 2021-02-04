@@ -13,11 +13,10 @@ or another Client Torrent
 
 - Go inside the project folder
 - At the command prompt you type **`pip install -r requirements.txt`**
-without the quotes.
 - After the installation is finished, just run in command prompt **`python bot-movies.py`** and download movies.
 
 ## Important
-
+Windows 10 Tests Only.
 It is recommended **NOT** to use the computer when placing the movies to download, because the automation was made to run alone, **after the download is in the Torrent client, you can use the PC at will**.
 
 ## Credits
