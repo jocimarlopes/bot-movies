@@ -15,8 +15,6 @@ print('''=====> MOVIES TORRENT DOWNLOAD
 
 movie = ''
 path= 'geckodriver.exe'
-#tagName = 'Baixa'
-count = range(0, 8, 1)
 
 while movie == '':
     movie = input('Movie name: ')
@@ -81,17 +79,10 @@ def goPageDownload():
 
 def goSearch(data):
     time.sleep(2.1)
-    print('TagName: ', data)
+    print('Wait.. ')
     time.sleep(1)
-    if data == 'Baixa':
-        print('Select: ', data)
-        findInSearch('Baixa', 'Download')
-    if data == 'Download':
-        print('Select: ', data)
-        findInSearch('Download', 'Torrent')
-    if data == 'Torrent' :
-        print('Select: ', data)
-        findInSearch('Torrent', 'Baixa')
+    print('Searching Torrent in Google Search... ', data)
+    findInSearch('Torrent', 'Download')
 
 def findInSearch(var, pos):
     print(var, pos)
@@ -99,31 +90,31 @@ def findInSearch(var, pos):
     returnURL = driver.current_url
     if var != pos:
         if best.find(var):
-            print('Find by ', var)
             element = driver.find_element_by_xpath("//div[@class='yuRUbf']/a/h3/span")
             element.text
             print(element.text)
+            time.sleep(1)
+            print('Found a Movie, wait..')
             if element.text.find(var):
                 element = driver.find_elements_by_class_name("yuRUbf")
-                print('Searching by word: ', var)
                 tagName = pos
-                element[random.randint(0, 9)].click()
+                element[random.randint(0, 5)].click()
                 time.sleep(3.9)
                 page_source = driver.page_source
                 if 'magnet:' in page_source:
-                    print('Magnet: TRUE')
+                    print('Torrent: TRUE')
                     time.sleep(1)
                     print('Go to Link Download')
                     goPageDownload()
                 else:
-                    print('Magnet: FALSE')
-                    print(var, pos)
-                    print(tagName)
+                    print('Torrent: FALSE')
                     time.sleep(1)
+                    print('Return to Google Search')
                     driver.get(returnURL)
                     time.sleep(1.8)
+                    print('and Research a Link with Direct Torrent')
                     goSearch(pos)
         else:
             return
-goSearch('Baixa')
+goSearch('Torrent')
 
