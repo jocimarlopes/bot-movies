@@ -86,6 +86,11 @@ class Bot:
         time.sleep(1)
         print('\nInitializing Transmission-cli')
         try:
-            subprocess.run(["transmission-cli", element.get_attribute('href')])
+            subprocess.run([
+                "transmission-cli",
+                "--no-downlimit",
+                "--finish exit",
+                element.get_attribute('href')
+            ])
         except NameError:
             print('Erro ao Abrir transmission-cli. Verifique se ele está instalado')
