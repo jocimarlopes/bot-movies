@@ -81,8 +81,11 @@ class Bot:
         current_url = driver.current_url
         source = "view-source:" + current_url
         driver.get(source)
-        time.sleep(3)
+        time.sleep(2)
         element = driver.find_element_by_tag_name("a[href*='magnet:']")
         time.sleep(1)
         print('\nInitializing Transmission-cli')
-        subprocess.run(["transmission-cli", element.get_attribute('href')])
+        try:
+            subprocess.run(["transmission-cli", element.get_attribute('href')])
+        except NameError:
+            print('Erro ao Abrir transmission-cli. Verifique se ele está instalado')
